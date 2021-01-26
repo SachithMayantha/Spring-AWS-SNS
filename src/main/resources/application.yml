@@ -1,0 +1,9 @@
+cloud:
+  aws:
+    region:
+      auto: false
+      static: ap-south-1
+    stack:
+      auto: false
+server:
+  port: 8090
