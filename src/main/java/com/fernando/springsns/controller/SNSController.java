@@ -14,7 +14,7 @@ public class SNSController {
     @Autowired
     private AmazonSNSClient amazonSNSClient;
 
-    private String TOPIC_ARN = "arn:aws:sns:ap-south-1:997395865103:spring-sns-topic";
+    private String TOPIC_ARN = "arn:aws:sns:ap-south-1:997395865103:my-sns-topic";
 
     @GetMapping("/subscribe/{email}")
     public String subscribeTopic(@PathVariable("email") String email){
