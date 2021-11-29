@@ -21,8 +21,8 @@ public class AmazonSNSConfig {
                 .withCredentials(
                         new AWSStaticCredentialsProvider(
                                 new BasicAWSCredentials(
-                                        "AKIA6QOLNDYHZS6L4SGV",
-                                        "olnkOJMoyaOIeshsjnh2qdbgnoidXQwp6kH7h1oU"
+                                        "AKIA6QOLNDYH3WMT2YNF",
+                                        "B8U2j8ANa2l4ZEzBm6H81vDjXecLz1vsvJ0T+gdb"
                                 )
                         )
                 )
