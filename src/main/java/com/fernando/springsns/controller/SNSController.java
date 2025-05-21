@@ -1,5 +1,6 @@
 package com.fernando.springsns.controller;
 
+import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.SubscribeRequest;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SNSController {
 
     @Autowired
-    private AmazonSNSClient amazonSNSClient;
+    private AmazonSNS amazonSNSClient;
 
-    private String TOPIC_ARN = "<ARN>";
+    private String TOPIC_ARN = "arn:aws:sns:ap-southeast-2:000000000000:MyTopic";
 
     @GetMapping("/subscribe/{email}")
     public String subscribeTopic(@PathVariable("email") String email){

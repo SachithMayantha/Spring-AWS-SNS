@@ -2,8 +2,16 @@ cloud:
   aws:
     region:
       auto: false
-      static: ap-south-1
+      static: ap-southeast-2
     stack:
       auto: false
+
+spring:
+  cloud:
+    aws:
+      sns:
+        endpoint: http://localhost:4566   # directs SNS calls locally
+      sqs:
+        endpoint: http://localhost:4566   # if you add SQS later
 server:
   port: 8090

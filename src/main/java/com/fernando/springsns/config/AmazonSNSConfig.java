@@ -2,8 +2,8 @@ package com.fernando.springsns.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.sns.AmazonSNSClient;
+import com.amazonaws.client.builder.AwsClientBuilder;
+import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,18 +14,26 @@ public class AmazonSNSConfig {
 
     @Primary
     @Bean
-    public AmazonSNSClient amazonSNSClient(){
-        return (AmazonSNSClient) AmazonSNSClientBuilder
-                .standard()
-                .withRegion(Regions.AP_SOUTH_1)
+    public AmazonSNS amazonSNS(AwsClientBuilder.EndpointConfiguration endpointConfig) {
+        return AmazonSNSClientBuilder.standard()
+                .withEndpointConfiguration(endpointConfig)
                 .withCredentials(
+                        // LocalStack accepts anything, so dummy creds are fine
                         new AWSStaticCredentialsProvider(
-                                new BasicAWSCredentials(
-                                        "<accessKey>",
-                                        "<secretKey>"
-                                )
+                                new BasicAWSCredentials("test", "test")
                         )
                 )
                 .build();
+    }
+
+    /**
+     * Centralize endpoint + region in a reusable bean.
+     */
+    @Bean
+    public AwsClientBuilder.EndpointConfiguration endpointConfig() {
+        return new AwsClientBuilder.EndpointConfiguration(
+                "http://localhost:4566",
+                "ap-southeast-2"
+        );
     }
 }
