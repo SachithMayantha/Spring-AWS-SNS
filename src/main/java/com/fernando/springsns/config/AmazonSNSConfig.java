@@ -5,6 +5,10 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSAsync;
+import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -35,5 +39,16 @@ public class AmazonSNSConfig {
                 "http://localhost:4566",
                 "ap-southeast-2"
         );
+    }
+
+    @Bean
+    @Primary
+    public AmazonSQSAsync amazonSQSAsync() {
+        return AmazonSQSAsyncClientBuilder.standard()
+                .withEndpointConfiguration(
+                        new AwsClientBuilder.EndpointConfiguration("http://localhost:4566", "ap-southeast-2"))
+                .withCredentials(new AWSStaticCredentialsProvider(
+                        new BasicAWSCredentials("test", "test")))
+                .build();
     }
 }
